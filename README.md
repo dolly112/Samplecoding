@@ -1,2 +1,2 @@
 # Samplecoding
-Token: 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
+Token: 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
