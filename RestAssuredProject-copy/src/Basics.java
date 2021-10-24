@@ -59,7 +59,8 @@ public class Basics {
 		Assert.assertEquals(actualAddress, newAddress);
 		
 		
-		
+		// path paraemter starts with {curly baces}
+		// query parameter starts with ? 
 		
 		
 		
