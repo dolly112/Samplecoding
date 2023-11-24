@@ -1,4 +1,4 @@
-package javaBasics;
+package com.javaPrograms;
 
 public class AccessModifiers {
 

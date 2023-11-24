@@ -1,4 +1,4 @@
-package restAssuredBasicsOnline;
+package com.restAssuredBasicsOnline;
 
 import java.util.HashMap;
 import java.util.Map;
