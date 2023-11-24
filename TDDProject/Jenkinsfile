@@ -1,0 +1,74 @@
+@Library('daisensx') _
+pipeline {
+    // Pipeline to build and test the backend, but do not deploy it.
+    options { 
+        disableConcurrentBuilds() 
+    }
+    agent {
+        kubernetes {
+            yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: cicd
+    Role: executor
+spec:
+  containers:
+  - name: maven-firefox
+    image: maven:3.3.9-jdk-8-alpine
+    command: ['cat']
+    tty: true
+  - name: maven-chrome
+    image: maven:3.3.9-jdk-8-alpine
+    command: ['cat']
+    tty: true
+  - name: selenium-chrome
+    image: selenium/node-chrome
+    env:
+    - name: HUB_PORT_4444_TCP_ADDR
+      value: selenium-grid-selenium-hub.nvhsound-dev.svc.cluster.local.
+    - name: HUB_PORT_4444_TCP_PORT
+      value: 4444
+    - name: DISPLAY
+      value: :99.0
+    - name: SE_OPTS
+      value: -port 5556
+    - name: NODE_MAX_SESSION
+      value: 5
+    deploy:
+      replicas: 5
+"""
+        }
+    }
+    environment {
+        DOCKER_TAG = createDockerTag()
+    }
+    stages {
+        stage('Build Java part') {
+            steps {
+                container('maven-chrome') {
+                    sh 'mvn -B -DskipTests clean package'
+                }
+            }
+        }
+      }
+    post { 
+        always {
+			step([$class: 'Publisher', reportFilenamePattern: '**/testng-results.xml'])
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'test-output', reportFiles: 'emailable-report.html', reportName: 'HTML Report', reportTitles: ''])
+        }
+        failure {
+            sendNotification('automation-testing')
+        }
+        unstable {
+            sendNotification('automation-testing')
+        }
+        fixed {
+            sendNotification('automation-testing')
+        }
+        success {
+            sendNotification('automation-testing')
+        }
+    }
+}
