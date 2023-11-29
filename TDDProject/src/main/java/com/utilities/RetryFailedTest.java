@@ -27,7 +27,7 @@ import org.openqa.selenium.OutputType;
 	     */
 	    @Override
 	    public boolean retry(ITestResult iTestResult) {
-	    	BaseInitializerOriginal baseObject=new BaseInitializerOriginal();
+	    	BaseInitializer baseObject=new BaseInitializer();
 	    	
 	    	int maxTry=Integer.valueOf(baseObject.getProperty("reRunFailedTestCount"));
 	        if (!iTestResult.isSuccess()) {    

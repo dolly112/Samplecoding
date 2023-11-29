@@ -58,7 +58,9 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.pageobjects.PageFactoryOverviewScreen;
 import com.dataloader.ExcelValidations;
+import com.pageobjects.PageFactoryHomePage;
 import com.pageobjects.PageFactoryLoginPage;
 
 import jcifs.smb.NtlmPasswordAuthentication;
@@ -71,7 +73,7 @@ import jcifs.smb.SmbFileOutputStream;
  * executions like: launch browser & close browser, take screenshots, create
  * report with unique name &email report, place report in shared drive etc....
  * 
- * @author GRANDIS
+ * 
  * 
  *
  */
@@ -80,8 +82,35 @@ public class BaseInitializer implements ITestNGListener {
 
 	public static Logger LOGGER = Logger.getLogger(BaseInitializer.class);
 	public static WebDriver driver;
+	public PageFactoryHomePage pfHomePage;
+	public PageFactoryLoginPage pfLoginPage;
+	public PageFactoryOverviewScreen pfOverviewPage;
 
 
+	public PageFactoryHomePage getPfHomePage() {
+		return pfHomePage;
+	}
+
+	public void setPfHomePage(PageFactoryHomePage pfHomePage) {
+		this.pfHomePage = pfHomePage;
+	}
+	
+	public PageFactoryLoginPage getPfLoginPage() {
+		return pfLoginPage;
+	}
+
+	public void setPfLoginPage(PageFactoryLoginPage pfLoginPage) {
+		this.pfLoginPage = pfLoginPage;
+	}
+	
+	public PageFactoryOverviewScreen getPfOverviewPage() {
+		return pfOverviewPage;
+	}
+
+	public void setPfOverviewPage(PageFactoryOverviewScreen pfOverviewPage) {
+		this.pfOverviewPage = pfOverviewPage;
+	}
+	
 	public static ExtentReports extentReport;
 	public static ExtentTest extentTest;
 	public ExtentHtmlReporter htmlReport;
@@ -117,27 +146,28 @@ public class BaseInitializer implements ITestNGListener {
 	 * It uses initialize the objects of page factory classes using setter method.
 	 * Note: TO Access the pagefactory elements, have to call the pagefactory settermethod here
 	 * 
-	 * @author GRANDIS
+	 * 
 	 */
 	public void objectIntialization() {
-		setPlaWebHomePage(new PLAWebHomePage(driver));
-		setSearchDatabaseScreen(new PageFactorySearchDatabase(driver));
-		setSearchCostcenterScreen(new PageFactorySearchCostcenter(driver));
+//		setPlaWebHomePage(new PLAWebHomePage(driver));
+//		setSearchDatabaseScreen(new PageFactorySearchDatabase(driver));
+//		setSearchCostcenterScreen(new PageFactorySearchCostcenter(driver));
 		setPfHomePage(new PageFactoryHomePage(driver));
-		setPfOverviewPage(new PageFactoryOverviewScreen(driver));
+//		setPfOverviewPage(new PageFactoryOverviewScreen(driver));
 		setPfLoginPage(new PageFactoryLoginPage(driver));
-		setManagementHomeScreen(new PageFactoryUserManagementHomeScreenPage(driver));
-		setManageCostCenterScreen(new PageFactoryManageCostCenterScreen(driver));
-		setAddEditCostCenterScreen(new PageFactoryAddEditCostCenterScreen(driver));
-		setPageFactoryManageUsers(new PageFactoryManageUsers(driver));
-		setPfUserManagementManageDatabasesPage(new PageFactoryUserManagemaentManageDatabasesPage (driver));
-		setPfMapRolesPage(new PageFactoryMapRolesPage (driver));
-		setPfUserManagementAddEditDatabasesPage(new PageFactoryUserManagemaentAddEditDatabasesPage (driver));
-		setManageRoles(new PageFactoryManageRoles(driver));
-		setPlaRequestAccessPage(new PLAWebRequestAccessPage(driver));
-		setPlaWebHomePage(new PLAWebHomePage(driver));
-		setRequestAccessPage(new PageFactoryRequestAccessPage(driver));
-		setManageRequestAccessPage(new PageFactoryManageRequestAccessPage(driver));
+		setPfOverviewPage(new PageFactoryOverviewScreen(driver));
+//		setManagementHomeScreen(new PageFactoryUserManagementHomeScreenPage(driver));
+//		setManageCostCenterScreen(new PageFactoryManageCostCenterScreen(driver));
+//		setAddEditCostCenterScreen(new PageFactoryAddEditCostCenterScreen(driver));
+//		setPageFactoryManageUsers(new PageFactoryManageUsers(driver));
+//		setPfUserManagementManageDatabasesPage(new PageFactoryUserManagemaentManageDatabasesPage (driver));
+//		setPfMapRolesPage(new PageFactoryMapRolesPage (driver));
+//		setPfUserManagementAddEditDatabasesPage(new PageFactoryUserManagemaentAddEditDatabasesPage (driver));
+//		setManageRoles(new PageFactoryManageRoles(driver));
+//		setPlaRequestAccessPage(new PLAWebRequestAccessPage(driver));
+//		setPlaWebHomePage(new PLAWebHomePage(driver));
+//		setRequestAccessPage(new PageFactoryRequestAccessPage(driver));
+//		setManageRequestAccessPage(new PageFactoryManageRequestAccessPage(driver));
 		BasicConfigurator.configure();
 	}
 
@@ -146,7 +176,7 @@ public class BaseInitializer implements ITestNGListener {
 	 * required language based on run configuration Get the all parameters from
 	 * dynamicTestng Class
 	 * 
-	 * @author GRANDIS on
+	 * 
 	 * @param browser
 	 * @param language
 	 * @param environment
@@ -174,7 +204,7 @@ public class BaseInitializer implements ITestNGListener {
 		Environment = "DEV"; //TEST
 		userId = getProperty("UserName");
 		//passWord = PasswordEncryptDcrypt.decrypt(System.getenv("AppPwd"));
-		passWord =getProperty("UserName"); // add you password for dev  rosmols  
+		passWord ="Password123"; // add you password for dev  rosmols  
 		newUser=getProperty("PlaUsername");
 		plaPassWord=getProperty("PlaUsername");
 		UMAdmin=getProperty("UMAdmin");
@@ -219,13 +249,18 @@ public class BaseInitializer implements ITestNGListener {
 //        devTools.send(Network.clearBrowserCache());
         
         PageFactoryLoginPage p = new PageFactoryLoginPage(null);     
-		if(pfLoginPage.isDaimlerFormDisplayed()) //commented
+		if(pfLoginPage.testFormDisplayed()) //commented
 		{
 		  pfLoginPage.login(userId, passWord); //commented
 //		Thread.sleep(5000);//		if(getlogin_TBox_Int_UserName())
 		}
 		else  //commented
 			extentTest.log(Status.FAIL, "Login page not displayed");	  //commented
+		
+		
+		//New URL added
+		
+		
 
 		/*if (language.contains("EN")) {
 			LOGGER.debug("Started the language selection");

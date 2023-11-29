@@ -18,7 +18,7 @@ import com.utilities.ExcelActions;
  * Data loader to get the currently running test case data from the excel and store it data provider
  * To use the test data in test method  should specify the data provider name
  * Note: It contains configuration excel path and respective sheet name
- * @author GRANDIS
+
  * 
  */
 public class DataLoader {
@@ -56,7 +56,6 @@ public class DataLoader {
 	/**
 	 * Method for store the test data using list iterator object array
 	 * Firstly store excel data in "Hashmap", those will be stored in list iterator of object array
-	 * @author GRANDIS
 	 * @param Sheetname 
 	 * @param ScriptName
 	 * @return

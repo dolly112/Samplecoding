@@ -9,7 +9,6 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import com.aventstack.extentreports.Status;
-import com.daimler.plaUM.testscripts.SampleTestScripts;
 
 /**
  * @author GRANDIS
@@ -19,7 +18,7 @@ import com.daimler.plaUM.testscripts.SampleTestScripts;
  *
  */
 
-public class CustomListners extends BaseInitializerOriginal implements ITestListener {
+public class CustomListners extends BaseInitializer implements ITestListener {
 	
 	public static Logger LOGGER = Logger.getLogger(CustomListners.class);
 
