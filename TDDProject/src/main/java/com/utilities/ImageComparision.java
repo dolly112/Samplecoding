@@ -31,7 +31,7 @@ import ru.yandex.qatools.ashot.comparison.ImageDiffer;
  *  
  */
 
-public class ImageComparision extends BaseInitializerOriginal {
+public class ImageComparision extends BaseInitializer {
 	public static Logger LOGGER = Logger.getLogger(ImageComparision.class);
 
 	/**

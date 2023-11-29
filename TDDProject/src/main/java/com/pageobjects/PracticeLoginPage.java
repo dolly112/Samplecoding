@@ -29,11 +29,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.aventstack.extentreports.Status;
-import com.utilities.BaseInitializerOriginal;
+import com.utilities.BaseInitializer;
 import com.utilities.BusinessUtilities;
 import com.utilities.PageActions;
 
-public class PracticeLoginPage extends BaseInitializerOriginal {
+public class PracticeLoginPage extends BaseInitializer {
 
 	public PracticeLoginPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -44,7 +44,7 @@ public class PracticeLoginPage extends BaseInitializerOriginal {
 	
 	PracticeLoginPage loginPage;
 
-	@FindBy(xpath = "//p[@data-testid='addEditCostcenter']")
-	public WebElement AddEditCostCenterScreen;
+	@FindBy(xpath = "//p[@data-testid='addEdit']")
+	public WebElement AddEditScreen;
 
 }

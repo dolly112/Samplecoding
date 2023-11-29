@@ -46,17 +46,17 @@ public class PageFactoryLoginPage extends PageActions {
 		return login_Icn_Int_UserNameClose;
 	}
 
-	@FindBy(xpath = "//input[@id='userid']")
+	@FindBy(xpath = "//input[@type='text']")
 	public WebElement login_TBox_Int_UserName;
 
 	public WebElement getlogin_TBox_Int_UserName() {
 		return login_TBox_Int_UserName;
 	}
 
-	@FindBy(xpath = "//input[@id='password']")
+	@FindBy(xpath = "//input[@type='password']")
 	public WebElement login_TBox_Int_Password;
 
-	@FindBy(xpath = "//form[@id='loginform']")
+	@FindBy(xpath = "//*[@alt='Practice Test Automation']") //updated
 	public WebElement loginForm;
 
 	@FindBy(xpath = "//div[@id='faqitemlist']")
@@ -114,6 +114,30 @@ public class PageFactoryLoginPage extends PageActions {
 	 * @throws IOException
 	 */
 
+	/*
+	 * public void login(String userId, String password) throws
+	 * InterruptedException, IOException { WebDriverWait wait = new
+	 * WebDriverWait(driver, Duration.ofMinutes(60)); WebElement clearUserID =
+	 * getlogin_Icn_Int_UserNameClose(); try {
+	 * wait.until(ExpectedConditions.visibilityOf(getlogin_TBox_Int_UserName())); //
+	 * Thread.sleep(5000); getlogin_TBox_Int_UserName().sendKeys(userId,
+	 * Keys.ENTER); // Thread.sleep(5000);
+	 * wait.until(ExpectedConditions.visibilityOf(getlogin_TBox_Int_Password())); //
+	 * Thread.sleep(5000); getlogin_TBox_Int_Password().sendKeys(password,
+	 * Keys.ENTER);
+	 * 
+	 * LOGGER.info(" login to the application successfully");
+	 * 
+	 * } catch (NoSuchElementException ignored) {
+	 * wait.until(ExpectedConditions.visibilityOf(getlogin_Icn_Int_UserNameClose()))
+	 * ; clearUserID.isDisplayed(); clearUserID.click();
+	 * getlogin_TBox_Int_UserName().sendKeys(userId, Keys.ENTER);
+	 * getlogin_TBox_Int_Password().sendKeys(password, Keys.ENTER);
+	 * LOGGER.info(" login to the application successfully");
+	 * 
+	 * } }
+	 */
+	
 	public void login(String userId, String password) throws InterruptedException, IOException {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(60));
 		WebElement clearUserID = getlogin_Icn_Int_UserNameClose();
@@ -125,7 +149,7 @@ public class PageFactoryLoginPage extends PageActions {
 			wait.until(ExpectedConditions.visibilityOf(getlogin_TBox_Int_Password()));
 //			Thread.sleep(5000);
 			getlogin_TBox_Int_Password().sendKeys(password, Keys.ENTER);
-
+            driver.findElement(By.xpath("//button[@id='submit']")).click(); //to be updated
 			LOGGER.info(" login to the application successfully");
 
 		} catch (NoSuchElementException ignored) {
@@ -211,8 +235,8 @@ public class PageFactoryLoginPage extends PageActions {
 			return false;
 	}
 
-	public boolean isDaimlerFormDisplayed() {
-		if (isElementExist(loginForm, 20) && isElementExist(faqItemList, 20))
+	public boolean testFormDisplayed() {
+		if (isElementExist(loginForm, 20) && isElementExist(loginForm, 20))
 			return true;
 		return false;
 	}

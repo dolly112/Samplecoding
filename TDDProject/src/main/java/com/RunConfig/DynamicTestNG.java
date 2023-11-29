@@ -27,7 +27,7 @@ import com.utilities.TestAnnotationTransformerListener;
  * This for create testNG.xml at run time, developed to make the "GroupTest" as
  * run configuration Run configuration parameters passed from this class
  * 
- * @author PRIYANV
+ *
  * 
  */
 public class DynamicTestNG {
@@ -63,14 +63,8 @@ public class DynamicTestNG {
 
 	// Create a list which can contain the classes that you want to run.
 	     List<XmlClass> myClasses = new ArrayList<XmlClass>(); //MapRolesTestScripts.java (2 matches)
-//		 myClasses.add(new XmlClass("com.daimler.plaUM.testscripts.ManageCostCenterTestScripts"));
-//	     myClasses.add(new XmlClass("com.daimler.plaUM.testscripts.ManageDataBaseTestScripts"));
-//		 myClasses.add(new XmlClass("com.daimler.plaUM.testscripts.MapRolesTestScripts"));
-//	     myClasses.add(new XmlClass("com.daimler.plaUM.testscripts.ManageUsersTestScripts"));
-	     
-//	     myClasses.add(new XmlClass("com.daimler.plaUM.testscripts.DataBaseCostCenterMappingTestScripts"));
-//	     myClasses.add(new XmlClass("com.daimler.plaUM.testscripts.ManageDataBaseTestScriptsSample"));
-	     myClasses.add(new XmlClass("com.daimler.plaUM.testscripts.UMPLAWebIntegratedTestScripts"));
+		 myClasses.add(new XmlClass("com.testscripts.ManageCostCenterTestScripts"));
+
 		// Assign that to the XmlTest Object created earlier.
 		myTest.setXmlClasses(myClasses);
 

@@ -28,7 +28,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.Parameters;
 import org.testng.xml.XmlSuite;
 
-import com.utilities.BaseInitializerOriginal;
+import com.utilities.BaseInitializer;
 
 
 
@@ -42,7 +42,7 @@ import com.utilities.BaseInitializerOriginal;
  *  
  */
 
-public class CustomReportListener extends BaseInitializerOriginal implements IReporter {
+public class CustomReportListener extends BaseInitializer implements IReporter {
 	public static Logger LOGGER = Logger.getLogger(CustomReportListener.class);
 	Integer iPassed = 0, iFailed = 0, iSkipped = 0, iTotal = 0;
 	long totalSec = 0;
@@ -53,7 +53,6 @@ public class CustomReportListener extends BaseInitializerOriginal implements IRe
 	
 	/**
 	 * method for generate the customized test report
-	 * @author PRIYANV
 	 * @param 
 	 */
 	
@@ -169,7 +168,7 @@ public class CustomReportListener extends BaseInitializerOriginal implements IRe
 	
 	/**
 	 	* Method for creating the customized Test Report html
-	 	* @author PRIYANV
+	 	
 		* @throws UnknownHostException
 	 */
 	public void createCustomReport() throws UnknownHostException{
@@ -187,8 +186,8 @@ public class CustomReportListener extends BaseInitializerOriginal implements IRe
 		htmlString = htmlString.replace("$os_version", System.getProperty("os.version"));
 		htmlString = htmlString.replace("$os_arch", System.getProperty("os.arch"));
 		htmlString = htmlString.replace("$hostName", InetAddress.getLocalHost().getHostName());
-		htmlString = htmlString.replace("$browser", BaseInitializerOriginal.Browser);
-		htmlString = htmlString.replace("$execution_env",BaseInitializerOriginal.Environment.toUpperCase());
+		htmlString = htmlString.replace("$browser", BaseInitializer.Browser);
+		htmlString = htmlString.replace("$execution_env",BaseInitializer.Environment.toUpperCase());
 		htmlString = htmlString.replace("$duration", hrs + "h " + mins + "m " + sec +"s");
 		htmlString = htmlString.replace("$testSuiteName", suiteName);
 		htmlString = htmlString.replace("$iPassed", iPassed.toString());

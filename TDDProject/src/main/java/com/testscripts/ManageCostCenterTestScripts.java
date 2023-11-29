@@ -27,7 +27,7 @@ import com.utilities.PageActions;
 		com.customreport.CustomReportListener.class, com.utilities.CustomListners.class })
 public class ManageCostCenterTestScripts extends BusinessUtilities {
 	/**
-	 * @author ROSMOLS
+	 * @author ROSHNI
 	 */
 	public static Logger LOGGER = Logger.getLogger(ManageCostCenterTestScripts.class);
 	BusinessUtilities businessUtilities = new BusinessUtilities();
@@ -37,10 +37,11 @@ public class ManageCostCenterTestScripts extends BusinessUtilities {
 	@Test(groups = "SmokeTest") // ,invocationCount=5)
 	public void TestCase001_ValidateDashboardPage() throws Exception {
 		LOGGER.info(new Exception().getStackTrace()[0].getMethodName() + " Execution Started");
-		String testcasename="TestCase1_ValidateErrorMessageOfSubDeptDeptPlantFieldWhenEmpty";
+		String testcasename="TestCase001_ValidateDashboardPage";
 		String sheetName="ManageCostcenter_EN";
 		extentTest.log(Status.INFO, "Navigate Successfully");
-		
+		excelValidations.setCostCenterValues(testcasename,sheetName);
+		String ccToBeDeleted = excelValidations.getCostCenter().toUpperCase();
 //		waitUntilLoadingSymbolAppearsPolling(pfHomePage.getManageCostcentersBtn(), 1, 120);
 //		manageCostCenterScreen.clickOnManageCostCenterButton();
 //		waitUntilLoadingSymbolAppearsPolling(manageCostCenterScreen.getMngCostcentersFrstRowFrstColumn(), 1, 120);
